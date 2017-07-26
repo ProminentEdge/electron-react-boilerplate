@@ -1,13 +1,18 @@
-import yargs from 'yargs';
+import cargs from 'commander';
 import path from 'path';
 import initUi from './spade-ui';
 import initService from './spade-service';
 
 
-const argv = yargs.argv;
-console.log('----[ argv: ', argv);
+cargs
+  .version('0.1.0')
+  .option('-s, --service', 'Run as a service')
+  .option('-u, --ui', 'Run with user interface')
+  .parse(process.argv);
 
-if (argv.service) {
+console.log('----[ argv: ', cargs);
+
+if (cargs.service) {
   console.log('----[ spade: running as Service');
   initService();
 } else {
